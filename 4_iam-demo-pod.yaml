@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eks-iam-demo
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eks-iam-demo
+  template:
+    metadata:
+      labels:
+        app: eks-iam-demo
+    spec:
+      serviceAccountName: demo-svcaccount
+      containers:
+      - name: eks-iam-demo
+        image: httpd
+        ports:
+        - containerPort: 80
